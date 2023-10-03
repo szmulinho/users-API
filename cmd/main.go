@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/szmulinho/prescription/cmd/server"
-	"github.com/szmulinho/prescription/internal/database"
+	"github.com/szmulinho/users/cmd/server"
+	"github.com/szmulinho/users/internal/database"
 )
 
 func main() {

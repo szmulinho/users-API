@@ -19,7 +19,6 @@ func Connect() *gorm.DB {
 	DB = connection
 
 	connection.AutoMigrate(&model.User{})
-	connection.AutoMigrate(&model.CreatePrescInput{})
 
 	return connection
 }
