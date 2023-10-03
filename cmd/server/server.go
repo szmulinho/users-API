@@ -37,7 +37,7 @@ func Run() {
 		handlers.AllowCredentials(),
 		handlers.MaxAge(86400),
 	)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", "8080"), cors(router)))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", "8082"), cors(router)))
 }
 
 func server() {
