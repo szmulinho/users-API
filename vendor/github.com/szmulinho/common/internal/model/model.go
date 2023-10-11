@@ -14,9 +14,9 @@ type Drug struct {
 }
 
 type CreatePrescInput struct {
-	PreId      int64    `json:"preid"`
-	Drugs      []string `json:"drugs"`
-	Expiration string   `json:"expiration"`
+	PreId      int64  `json:"pre_id"`
+	Drugs      string `json:"drugs"`
+	Expiration string `json:"expiration"`
 }
 
 type Opinion struct {
@@ -26,7 +26,7 @@ type Opinion struct {
 }
 
 type Order struct {
-	ID      int64  `json:"order-id" gorm:"primaryKey;autoIncrement"`
+	ID      int64  `json:"order_id" gorm:"primaryKey;autoIncrement"`
 	Name    string `json:"name"`
 	Email   string `json:"email"`
 	Address string `json:"address"`
