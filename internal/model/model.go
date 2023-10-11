@@ -4,8 +4,6 @@ import (
 	"os"
 )
 
-var Prescs []CreatePrescInput
-
 var JwtKey = []byte(os.Getenv("JWT_KEY"))
 
 type JwtToken struct {
@@ -19,15 +17,6 @@ type Exception struct {
 type Response struct {
 	Data string `json:"data"`
 }
-
-type CreatePrescInput struct {
-	PreID      int64  `json:"preid" gorm:"primaryKey;autoIncrement"`
-	Patient    string `json:"patient"`
-	Drugs      string `gorm:"type:text[]" json:"drugs"`
-	Expiration string `json:"expiration"`
-}
-
-var Prescription CreatePrescInput
 
 type User struct {
 	ID       int64  `gorm:"primaryKey;autoIncrement"`

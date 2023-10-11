@@ -1,15 +1,14 @@
-package register
+package endpoints
 
 import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/szmulinho/users/internal/database"
 	"github.com/szmulinho/users/internal/model"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+func (h *handlers) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var newUser model.User
 
 	err := json.NewDecoder(r.Body).Decode(&newUser)
@@ -26,9 +25,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	newUser.Password = string(hashedPassword)
 
-	newUser.Role = "doctor"
+	newUser.Role = "user"
 
-	result := database.DB.Create(&newUser)
+	result := h.db.Create(&newUser)
 	if result.Error != nil {
 		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
 		return

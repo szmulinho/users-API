@@ -1,15 +1,13 @@
-package login
+package endpoints
 
 import (
 	"encoding/json"
-	"github.com/szmulinho/users/internal/api/jwt"
-	"github.com/szmulinho/users/internal/database"
 	"github.com/szmulinho/users/internal/model"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 )
 
-func Login(w http.ResponseWriter, r *http.Request) {
+func (h *handlers) Login(w http.ResponseWriter, r *http.Request) {
 	var credentials struct {
 		Login    string `json:"login"`
 		Password string `json:"password"`
@@ -22,7 +20,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user model.User
-	result := database.DB.Where("login = ?", credentials.Login).First(&user)
+	result := h.db.Where("login = ?", credentials.Login).First(&user)
 	if result.Error != nil {
 		http.Error(w, "Invalid login or password", http.StatusUnauthorized)
 		return
@@ -34,13 +32,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var isDoctor bool
+	var isUser bool
 
-	if user.Role == "doctor" {
-		isDoctor = true
+	if user.Role == "user" {
+		isUser = true
 	}
 
-	token, err := jwt.GenerateToken(w, r, user.ID, isDoctor)
+	token, err := h.GenerateToken(w, r, user.ID, isUser)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

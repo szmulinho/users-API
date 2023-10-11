@@ -1,4 +1,4 @@
-package jwt
+package endpoints
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func ValidateMiddleware(next http.HandlerFunc) http.HandlerFunc {
+func (h *handlers) ValidateMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authorizationHeader := r.Header.Get("authorization")
 		if authorizationHeader != "" {

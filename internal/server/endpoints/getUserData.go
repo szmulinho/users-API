@@ -1,20 +1,19 @@
-package userData
+package endpoints
 
 import (
 	"encoding/json"
 	"errors"
 	"github.com/golang-jwt/jwt"
-	"github.com/szmulinho/users/internal/database"
 	"github.com/szmulinho/users/internal/model"
 	"log"
 	"net/http"
 	"strings"
 )
 
-func GetUserDataHandler(w http.ResponseWriter, r *http.Request) {
+func (h *handlers) GetUserDataHandler(w http.ResponseWriter, r *http.Request) {
 	token := r.Header.Get("Authorization")
 
-	user, err := getUserFromToken(token)
+	user, err := h.getUserFromToken(token)
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -33,7 +32,7 @@ func GetUserDataHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(response)
 }
 
-func getUserFromToken(tokenString string) (*model.User, error) {
+func (h *handlers) getUserFromToken(tokenString string) (*model.User, error) {
 	tokenString = strings.Replace(tokenString, "Bearer ", "", 1)
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -56,7 +55,7 @@ func getUserFromToken(tokenString string) (*model.User, error) {
 	userID := int64(claims["userID"].(float64))
 
 	var user model.User
-	if err := database.DB.First(&user, userID).Error; err != nil {
+	if err := h.db.First(&user, userID).Error; err != nil {
 		return nil, err
 	}
 
