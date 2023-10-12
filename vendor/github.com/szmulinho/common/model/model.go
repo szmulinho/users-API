@@ -13,11 +13,18 @@ type Drug struct {
 	Price  int64  `json:"price"`
 }
 
-type CreatePrescInput struct {
-	PreId      int64  `json:"pre_id"`
-	Drugs      string `json:"drugs"`
+type Drugs []string
+
+type Prescription struct {
+	PreID      int64  `json:"pre_id" gorm:"primaryKey;autoIncrement"`
+	Drugs      Drugs  `gorm:"type:text[]" json:"drugs"`
+	Patient    string `json:"patient"`
 	Expiration string `json:"expiration"`
 }
+
+var Presc Prescription
+
+var Prescriptions []Prescription
 
 type Opinion struct {
 	ID      int64  `json:"id" gorm:"primaryKey;autoIncrement"`

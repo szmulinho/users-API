@@ -1,8 +1,8 @@
 package database
 
 import (
-	"github.com/szmulinho/common/internal/config"
-	"github.com/szmulinho/common/internal/model"
+	"github.com/szmulinho/common/config"
+	"github.com/szmulinho/common/model"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -21,7 +21,7 @@ func Connect() (*gorm.DB, error) {
 		&model.Doctor{},
 		&model.Opinion{},
 		&model.User{},
-		&model.CreatePrescInput{},
+		&model.Prescription{},
 		&model.Drug{},
 		&model.Order{},
 	)
