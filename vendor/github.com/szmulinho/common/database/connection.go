@@ -1,13 +1,20 @@
 package database
 
 import (
+	"github.com/joho/godotenv"
 	"github.com/szmulinho/common/config"
 	"github.com/szmulinho/common/model"
-	"os"
-
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"os"
 )
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+}
 
 func LoadConfigFromEnv() config.StorageConfig {
 	return config.StorageConfig{
