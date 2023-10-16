@@ -16,20 +16,20 @@ var (
 	}
 )
 
-func GithubLog() {
-	http.HandleFunc("/login", handleLogin)
+func (h *handlers) GithubLog() {
+	http.HandleFunc("/login", h.HandleLogin)
 
-	http.HandleFunc("/auth/callback", handleCallback)
+	http.HandleFunc("/auth/callback", h.HandleCallback)
 
 	http.ListenAndServe(":3000", nil)
 }
 
-func handleLogin(w http.ResponseWriter, r *http.Request) {
+func (h *handlers) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	url := githubOauthConfig.AuthCodeURL("", oauth2.AccessTypeOffline)
 	http.Redirect(w, r, url, http.StatusFound)
 }
 
-func handleCallback(w http.ResponseWriter, r *http.Request) {
+func (h *handlers) HandleCallback(w http.ResponseWriter, r *http.Request) {
 	// Handle the OAuth callback from GitHub
 	code := r.URL.Query().Get("code")
 	_, err := githubOauthConfig.Exchange(r.Context(), code)
