@@ -40,8 +40,7 @@ func Run(ctx context.Context, db *gorm.DB) {
 		handlers.MaxAge(86400),
 	)
 	go func() {
-		err := http.ListenAndServeTLS(":443", "cert.pem", "key.pem", cors(router))
-
+		err := http.ListenAndServe(fmt.Sprintf(":%s", "https://szmul-med-users.onrender.com/"), cors(router))
 		if err != nil {
 			log.Fatal(err)
 		}
