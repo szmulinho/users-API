@@ -14,8 +14,6 @@ type Handlers interface {
 	CreateUser(w http.ResponseWriter, r *http.Request)
 	ValidateMiddleware(next http.HandlerFunc) http.HandlerFunc
 	getUserFromToken(tokenString string) (*model.User, error)
-	HandleLogin(w http.ResponseWriter, r *http.Request)
-	HandleCallback(w http.ResponseWriter, r *http.Request)
 }
 
 type handlers struct {
