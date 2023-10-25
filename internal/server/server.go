@@ -28,8 +28,6 @@ func Run(ctx context.Context, db *gorm.DB) {
 	router.HandleFunc("/register", handler.CreateUser).Methods("POST")
 	router.HandleFunc("/user", handler.GetUserDataHandler).Methods("GET")
 	router.HandleFunc("/users", handler.GetAllUsers).Methods("GET")
-	router.HandleFunc("/github", handler.HandleLogin).Methods("POST")
-	router.HandleFunc("/github", handler.HandleCallback).Methods("GET")
 	router.HandleFunc("/users", handler.GetAllUsers).Methods("GET")
 	cors := handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
