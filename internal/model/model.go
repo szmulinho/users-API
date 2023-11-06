@@ -13,6 +13,7 @@ type Exception struct {
 type User struct {
 	ID       int64  `gorm:"primaryKey;autoIncrement"`
 	Login    string `gorm:"unique" json:"login"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 	Role     string `json:"role"`
 }
