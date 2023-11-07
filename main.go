@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/szmulinho/common/database"
 	"github.com/szmulinho/common/utils"
+	"github.com/szmulinho/users/internal/database"
 	"github.com/szmulinho/users/internal/server"
 	"log"
 )
