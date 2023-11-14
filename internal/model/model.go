@@ -1,6 +1,7 @@
 package model
 
 import (
+	"gorm.io/gorm"
 	"os"
 )
 
@@ -21,4 +22,12 @@ type User struct {
 type LoginResponse struct {
 	User  User   `json:"user"`
 	Token string `json:"token"`
+}
+
+type PublicRepo struct {
+	gorm.Model
+	GitHubLoginID uint   `gorm:"foreignKey"`
+	ID            int    `json:"id"`
+	Name          string `json:"name"`
+	Description   string `json:"description"`
 }
