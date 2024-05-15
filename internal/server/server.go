@@ -28,7 +28,6 @@ func Run(ctx context.Context, db *gorm.DB) {
 	router.HandleFunc("/register", handler.CreateUser).Methods("POST")
 	router.HandleFunc("/user", handler.GetUserDataHandler).Methods("GET")
 	router.HandleFunc("/users", handler.GetAllUsers).Methods("GET")
-	router.HandleFunc("/users", handler.GetAllUsers).Methods("GET")
 	cors := handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
 		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"}),
@@ -45,5 +44,4 @@ func Run(ctx context.Context, db *gorm.DB) {
 
 	}()
 	<-ctx.Done()
-
 }
