@@ -12,6 +12,7 @@ type Handlers interface {
 	GetUserDataHandler(w http.ResponseWriter, r *http.Request)
 	Login(w http.ResponseWriter, r *http.Request)
 	CreateUser(w http.ResponseWriter, r *http.Request)
+	UpdateAvatar(w http.ResponseWriter, r *http.Request)
 	ValidateMiddleware(next http.HandlerFunc) http.HandlerFunc
 	getUserFromToken(tokenString string) (*model.User, error)
 }

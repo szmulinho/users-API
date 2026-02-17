@@ -27,6 +27,7 @@ func Run(ctx context.Context, db *gorm.DB) {
 	router.HandleFunc("/login", handler.Login).Methods("POST")
 	router.HandleFunc("/register", handler.CreateUser).Methods("POST")
 	router.HandleFunc("/user", handler.GetUserDataHandler).Methods("GET")
+	router.HandleFunc("/user/avatar", handler.UpdateAvatar).Methods("PATCH")
 	router.HandleFunc("/users", handler.GetAllUsers).Methods("GET")
 	cors := handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
