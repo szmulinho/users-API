@@ -43,7 +43,12 @@ type StorageConfig struct {
 }
 
 func (c StorageConfig) ConnectionString() string {
+	sslmode := c.SSLMode
+	if sslmode == "" {
+		sslmode = "require" // Domyślna wartość dla Render.com
+	}
+	
 	connectionString := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
-		c.Host, c.User, c.Password, c.Dbname, c.Port, c.SSLMode)
+		c.Host, c.User, c.Password, c.Dbname, c.Port, sslmode)
 	return connectionString
 }
